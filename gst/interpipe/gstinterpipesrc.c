@@ -200,7 +200,7 @@ struct _GstInterPipeSrc
    * element's streaming thread and only when needed, not per buffer. */
   gint latency_check;
 
-  /* Accept the events received from the interpipesink */
+  /* Accept events from the node being listened to */
   gboolean accept_events;
 
   /* Accept end of stream event */
@@ -252,8 +252,7 @@ gst_inter_pipe_src_class_init (GstInterPipeSrcClass * klass)
 
   g_object_class_install_property (gobject_class, PROP_ALLOW_RENEGOTIATION,
       g_param_spec_boolean ("allow-renegotiation", "Allow Renegotiation",
-          "Allow the caps renegotiation with an interpipesink with different "
-          "caps only if the allow-renegotiation property is set to true",
+          "Allow caps renegotiation when switching to a node with different caps",
           TRUE, G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class, PROP_STREAM_SYNC,
@@ -268,13 +267,13 @@ gst_inter_pipe_src_class_init (GstInterPipeSrcClass * klass)
 
   g_object_class_install_property (gobject_class, PROP_ACCEPT_EVENTS,
       g_param_spec_boolean ("accept-events", "Accept Events",
-          "Accept the events received from the interpipesink",
+          "Accept events from the node being listened to",
           TRUE, G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (gobject_class, PROP_ACCEPT_EOS_EVENT,
       g_param_spec_boolean ("accept-eos-event", "Accept EOS Events",
-          "Accept the EOS event received from the interpipesink only if it "
-          "is set to true", TRUE, G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
+          "Accept end-of-stream events from the node being listened to",
+          TRUE, G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS));
 
   basesrc_class->start = GST_DEBUG_FUNCPTR (gst_inter_pipe_src_start);
   basesrc_class->stop = GST_DEBUG_FUNCPTR (gst_inter_pipe_src_stop);

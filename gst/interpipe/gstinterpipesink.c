@@ -192,7 +192,7 @@ gst_inter_pipe_sink_class_init (GstInterPipeSinkClass * klass)
 
   g_object_class_install_property (gobject_class, PROP_NUM_LISTENERS,
       g_param_spec_uint ("num-listeners", "Number of listeners",
-          "Number of interpipe sources listening to this specific sink",
+          "Number of sources listening to this sink",
           0, G_MAXUINT, 0, G_PARAM_READABLE));
 
   basesink_class->get_caps = GST_DEBUG_FUNCPTR (gst_inter_pipe_sink_get_caps);
